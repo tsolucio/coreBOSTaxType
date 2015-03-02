@@ -239,6 +239,16 @@
 </actions>
 <relatedmodule>Products</relatedmodule>
 </relatedlist>
+<relatedlist>
+<function>get_dependents_list</function>
+<label>Services</label>
+<sequence>5</sequence>
+<presence>0</presence>
+<actions>
+	<action>ADD</action>
+</actions>
+<relatedmodule>Services</relatedmodule>
+</relatedlist>
 </relatedlists>
 <customlinks>
 </customlinks>

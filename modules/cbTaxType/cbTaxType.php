@@ -425,7 +425,8 @@ class cbTaxType extends CRMEntity {
 		if($event_type == 'module.postinstall') {
 			// TODO Handle post installation actions
 			$mods = array('Accounts'=>'LBL_ACCOUNT_INFORMATION', 'Contacts'=>'LBL_CONTACT_INFORMATION',
-				'Vendors'=>'LBL_VENDOR_INFORMATION', 'Products'=>'LBL_PRODUCT_INFORMATION');
+				'Vendors'=>'LBL_VENDOR_INFORMATION', 'Products'=>'LBL_PRICING_INFORMATION',
+				'Services'=>'LBL_PRICING_INFORMATION');
 			foreach ($mods as $modname => $block) {
 				$module = Vtiger_Module::getInstance($modname);
 				$blockInstance = VTiger_Block::getInstance($block,$module);
