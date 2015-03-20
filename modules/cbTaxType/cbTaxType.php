@@ -445,7 +445,7 @@ class cbTaxType extends CRMEntity {
 					$field->setRelatedModules(Array('cbTaxType'));
 					echo "<br><b>Added Field to $modname module.</b><br>";
 				}
-			}			
+			}
 		} else if($event_type == 'module.disabled') {
 			// TODO Handle actions when this module is disabled.
 		} else if($event_type == 'module.enabled') {
