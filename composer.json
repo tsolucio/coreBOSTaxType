@@ -1,0 +1,28 @@
+{
+	"name": "tsolucio/coreBOSTaxType",
+	"type": "corebos-module",
+	"properties": {
+		"name": "coreBOS Tax Types",
+		"description": "Tax type module for advanced tax management in coreBOS.",
+		"keywords": ["tax","impuesto","VAT","IVA","TVA"],
+		"homepage": "http://corebos.org/documentation/doku.php?id=en:extensions:extensions:coreBOSTaxType",
+		"version": "1.0",
+		"time": "2015-01-14",
+		"license": "Vizsage",
+		"extra": {
+			"price": "0",
+			"distribution": "Free",
+		},
+		"authors": [
+					{
+					"name": "JPL TSolucio, S.L.",
+					"email": "info(at)tsolucio(dot)com"
+					}
+		"support": {
+				"email": "info(at)tsolucio(dot)com",
+				"issues": "https://github.com/tsolucio/coreBOSTaxType",
+				"forum": "http://discussions.corebos.org/",
+				"source": "https://github.com/tsolucio/coreBOSTaxType"
+		}
+	}
+}
