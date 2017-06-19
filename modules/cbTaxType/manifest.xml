@@ -32,7 +32,7 @@
 <table>
 <name>vtiger_cbtaxtype</name>
 <sql><![CDATA[CREATE TABLE `vtiger_cbtaxtype` (
-  `cbtaxtypeid` int(11) default NULL,
+  `cbtaxtypeid` int(11) NOT NULL,
   `taxtypename` varchar(100) default NULL,
   PRIMARY KEY (`cbtaxtypeid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8]]></sql>
