@@ -131,7 +131,7 @@
 <displaytype>2</displaytype>
 <info_type>BAS</info_type>
 <helpinfo><![CDATA[]]></helpinfo>
-<masseditable>1</masseditable>
+<masseditable>0</masseditable>
 </field>
 <field>
 <fieldname>modifiedtime</fieldname>
@@ -151,7 +151,7 @@
 <displaytype>2</displaytype>
 <info_type>BAS</info_type>
 <helpinfo><![CDATA[]]></helpinfo>
-<masseditable>1</masseditable>
+<masseditable>0</masseditable>
 </field>
 </fields>
 </block>
@@ -202,7 +202,7 @@
 </customview>
 </customviews>
 <sharingaccess>
-<default>public</default>
+<default>private</default>
 </sharingaccess>
 <actions>
 <action>
@@ -225,7 +225,7 @@
 <sequence>1</sequence>
 <presence>0</presence>
 <actions>
-	<action>ADD</action>
+<action>ADD</action>
 </actions>
 <relatedmodule>Accounts</relatedmodule>
 </relatedlist>
@@ -235,7 +235,7 @@
 <sequence>2</sequence>
 <presence>0</presence>
 <actions>
-	<action>ADD</action>
+<action>ADD</action>
 </actions>
 <relatedmodule>Contacts</relatedmodule>
 </relatedlist>
@@ -245,7 +245,7 @@
 <sequence>3</sequence>
 <presence>0</presence>
 <actions>
-	<action>ADD</action>
+<action>ADD</action>
 </actions>
 <relatedmodule>Vendors</relatedmodule>
 </relatedlist>
@@ -255,7 +255,7 @@
 <sequence>4</sequence>
 <presence>0</presence>
 <actions>
-	<action>ADD</action>
+<action>ADD</action>
 </actions>
 <relatedmodule>Products</relatedmodule>
 </relatedlist>
@@ -265,7 +265,7 @@
 <sequence>5</sequence>
 <presence>0</presence>
 <actions>
-	<action>ADD</action>
+<action>ADD</action>
 </actions>
 <relatedmodule>Services</relatedmodule>
 </relatedlist>

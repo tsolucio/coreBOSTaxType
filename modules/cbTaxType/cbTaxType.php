@@ -7,33 +7,42 @@
  * Portions created by vtiger are Copyright (C) vtiger.
  * All Rights Reserved.
  ************************************************************************************/
-require_once('data/CRMEntity.php');
-require_once('data/Tracker.php');
+require_once 'data/CRMEntity.php';
+require_once 'data/Tracker.php';
 
 class cbTaxType extends CRMEntity {
-	var $db, $log; // Used in class functions of CRMEntity
+	public $db;
+	public $log;
 
-	var $table_name = 'vtiger_cbtaxtype';
-	var $table_index= 'cbtaxtypeid';
-	var $column_fields = Array();
+	public $table_name = 'vtiger_cbtaxtype';
+	public $table_index= 'cbtaxtypeid';
+	public $column_fields = array();
 
 	/** Indicator if this is a custom module or standard module */
-	var $IsCustomModule = true;
-	var $HasDirectImageField = false;
+	public $IsCustomModule = true;
+	public $HasDirectImageField = false;
+	public $moduleIcon = array('library' => 'standard', 'containerClass' => 'slds-icon_container slds-icon-standard-account', 'class' => 'slds-icon', 'icon'=>'partner_fund_claim');
+
 	/**
 	 * Mandatory table for supporting custom fields.
 	 */
-	var $customFieldTable = Array('vtiger_cbtaxtypecf', 'cbtaxtypeid');
+	public $customFieldTable = array('vtiger_cbtaxtypecf', 'cbtaxtypeid');
+	// related_tables variable should define the association (relation) between dependent tables
+	// FORMAT: related_tablename => array(related_tablename_column[, base_tablename, base_tablename_column[, related_module]] )
+	// Here base_tablename_column should establish relation with related_tablename_column
+	// NOTE: If base_tablename and base_tablename_column are not specified, it will default to modules (table_name, related_tablename_column)
+	// Uncomment the line below to support custom field columns on related lists
+	// public $related_tables = array('vtiger_MODULE_NAME_LOWERCASEcf' => array('MODULE_NAME_LOWERCASEid', 'vtiger_MODULE_NAME_LOWERCASE', 'MODULE_NAME_LOWERCASEid', 'MODULE_NAME_LOWERCASE'));
 
 	/**
 	 * Mandatory for Saving, Include tables related to this module.
 	 */
-	var $tab_name = Array('vtiger_crmentity', 'vtiger_cbtaxtype', 'vtiger_cbtaxtypecf');
+	public $tab_name = array('vtiger_crmentity', 'vtiger_cbtaxtype', 'vtiger_cbtaxtypecf');
 
 	/**
 	 * Mandatory for Saving, Include tablename and tablekey columnname here.
 	 */
-	var $tab_name_index = Array(
+	public $tab_name_index = array(
 		'vtiger_crmentity' => 'crmid',
 		'vtiger_cbtaxtype'   => 'cbtaxtypeid',
 		'vtiger_cbtaxtypecf' => 'cbtaxtypeid');
@@ -41,59 +50,59 @@ class cbTaxType extends CRMEntity {
 	/**
 	 * Mandatory for Listing (Related listview)
 	 */
-	var $list_fields = Array (
-		/* Format: Field Label => Array(tablename => columnname) */
+	public $list_fields = array(
+		/* Format: Field Label => array(tablename => columnname) */
 		// tablename should not have prefix 'vtiger_'
-		'taxtypename'=> Array('cbtaxtype' => 'taxtypename'),
-		'Assigned To' => Array('crmentity' => 'smownerid')
+		'taxtypename'=> array('cbtaxtype' => 'taxtypename'),
+		'Assigned To' => array('crmentity' => 'smownerid')
 	);
-	var $list_fields_name = Array(
+	public $list_fields_name = array(
 		/* Format: Field Label => fieldname */
 		'taxtypename'=> 'taxtypename',
 		'Assigned To' => 'assigned_user_id'
 	);
 
 	// Make the field link to detail view from list view (Fieldname)
-	var $list_link_field = 'taxtypename';
+	public $list_link_field = 'taxtypename';
 
 	// For Popup listview and UI type support
-	var $search_fields = Array(
-		/* Format: Field Label => Array(tablename => columnname) */
+	public $search_fields = array(
+		/* Format: Field Label => array(tablename => columnname) */
 		// tablename should not have prefix 'vtiger_'
-		'taxtypename'=> Array('cbtaxtype' => 'taxtypename')
+		'taxtypename'=> array('cbtaxtype' => 'taxtypename')
 	);
-	var $search_fields_name = Array(
+	public $search_fields_name = array(
 		/* Format: Field Label => fieldname */
 		'taxtypename'=> 'taxtypename'
 	);
 
 	// For Popup window record selection
-	var $popup_fields = Array('taxtypename');
+	public $popup_fields = array('taxtypename');
 
 	// Placeholder for sort fields - All the fields will be initialized for Sorting through initSortFields
-	var $sortby_fields = Array();
+	public $sortby_fields = array();
 
 	// For Alphabetical search
-	var $def_basicsearch_col = 'taxtypename';
+	public $def_basicsearch_col = 'taxtypename';
 
 	// Column value to use on detail view record text display
-	var $def_detailview_recname = 'taxtypename';
+	public $def_detailview_recname = 'taxtypename';
 
 	// Required Information for enabling Import feature
-	var $required_fields = Array('taxtypename'=>1);
+	public $required_fields = array('taxtypename'=>1);
 
 	// Callback function list during Importing
-	var $special_functions = Array('set_import_assigned_user');
+	public $special_functions = array('set_import_assigned_user');
 
-	var $default_order_by = 'taxtypename';
-	var $default_sort_order='ASC';
+	public $default_order_by = 'taxtypename';
+	public $default_sort_order='ASC';
 	// Used when enabling/disabling the mandatory fields for the module.
 	// Refers to vtiger_field.fieldname values.
-	var $mandatory_fields = Array('createdtime', 'modifiedtime', 'taxtypename');
+	public $mandatory_fields = array('createdtime', 'modifiedtime', 'taxtypename');
 
-	function save_module($module) {
+	public function save_module($module) {
 		if ($this->HasDirectImageField) {
-			$this->insertIntoAttachment($this->id,$module);
+			$this->insertIntoAttachment($this->id, $module);
 		}
 	}
 
@@ -102,9 +111,9 @@ class cbTaxType extends CRMEntity {
 	 * @param String Module name
 	 * @param String Event Type (module.postinstall, module.disabled, module.enabled, module.preuninstall)
 	 */
-	function vtlib_handler($modulename, $event_type) {
-		if($event_type == 'module.postinstall') {
-			// TODO Handle post installation actions
+	public function vtlib_handler($modulename, $event_type) {
+		if ($event_type == 'module.postinstall') {
+			// Handle post installation actions
 			$this->setModuleSeqNumber('configure', $modulename, 'taxtype-', '0000001');
 			$mods = array('Accounts'=>'LBL_ACCOUNT_INFORMATION', 'Contacts'=>'LBL_CONTACT_INFORMATION',
 				'Vendors'=>'LBL_VENDOR_INFORMATION', 'Products'=>'LBL_PRICING_INFORMATION',
@@ -128,16 +137,16 @@ class cbTaxType extends CRMEntity {
 					echo "<br><b>Added Field to $modname module.</b><br>";
 				}
 			}
-		} else if($event_type == 'module.disabled') {
-			// TODO Handle actions when this module is disabled.
-		} else if($event_type == 'module.enabled') {
-			// TODO Handle actions when this module is enabled.
-		} else if($event_type == 'module.preuninstall') {
-			// TODO Handle actions when this module is about to be deleted.
-		} else if($event_type == 'module.preupdate') {
-			// TODO Handle actions before this module is updated.
-		} else if($event_type == 'module.postupdate') {
-			// TODO Handle actions after this module is updated.
+		} elseif ($event_type == 'module.disabled') {
+			// Handle actions when this module is disabled.
+		} elseif ($event_type == 'module.enabled') {
+			// Handle actions when this module is enabled.
+		} elseif ($event_type == 'module.preuninstall') {
+			// Handle actions when this module is about to be deleted.
+		} elseif ($event_type == 'module.preupdate') {
+			// Handle actions before this module is updated.
+		} elseif ($event_type == 'module.postupdate') {
+			// Handle actions after this module is updated.
 		}
 	}
 
@@ -146,27 +155,27 @@ class cbTaxType extends CRMEntity {
 	 * NOTE: This function has been added to CRMEntity (base class).
 	 * You can override the behavior by re-defining it here.
 	 */
-	// function save_related_module($module, $crmid, $with_module, $with_crmid) { }
+	// public function save_related_module($module, $crmid, $with_module, $with_crmid) { }
 
 	/**
 	 * Handle deleting related module information.
 	 * NOTE: This function has been added to CRMEntity (base class).
 	 * You can override the behavior by re-defining it here.
 	 */
-	//function delete_related_module($module, $crmid, $with_module, $with_crmid) { }
+	//public function delete_related_module($module, $crmid, $with_module, $with_crmid) { }
 
 	/**
 	 * Handle getting related list information.
 	 * NOTE: This function has been added to CRMEntity (base class).
 	 * You can override the behavior by re-defining it here.
 	 */
-	//function get_related_list($id, $cur_tab_id, $rel_tab_id, $actions=false) { }
+	//public function get_related_list($id, $cur_tab_id, $rel_tab_id, $actions=false) { }
 
 	/**
 	 * Handle getting dependents list information.
 	 * NOTE: This function has been added to CRMEntity (base class).
 	 * You can override the behavior by re-defining it here.
 	 */
-	//function get_dependents_list($id, $cur_tab_id, $rel_tab_id, $actions=false) { }
+	//public function get_dependents_list($id, $cur_tab_id, $rel_tab_id, $actions=false) { }
 }
 ?>

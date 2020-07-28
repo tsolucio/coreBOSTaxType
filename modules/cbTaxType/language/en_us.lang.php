@@ -8,7 +8,7 @@
  * All Rights Reserved.
  ************************************************************************************/
 
-$mod_strings = Array(
+$mod_strings = array(
 	'cbTaxType' => 'Tax Types',
 	'SINGLE_cbTaxType' => 'Tax Type',
 	'cbTaxType ID' => 'Tax Type ID',
@@ -19,5 +19,4 @@ $mod_strings = Array(
 
 	'taxtypename' => 'Tax Type Name',
 );
-
 ?>
