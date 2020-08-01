@@ -12,7 +12,6 @@ require_once 'data/Tracker.php';
 
 class cbTaxType extends CRMEntity {
 	public $db;
-	public $log;
 
 	public $table_name = 'vtiger_cbtaxtype';
 	public $table_index= 'cbtaxtypeid';
@@ -115,12 +114,16 @@ class cbTaxType extends CRMEntity {
 		if ($event_type == 'module.postinstall') {
 			// Handle post installation actions
 			$this->setModuleSeqNumber('configure', $modulename, 'taxtype-', '0000001');
-			$mods = array('Accounts'=>'LBL_ACCOUNT_INFORMATION', 'Contacts'=>'LBL_CONTACT_INFORMATION',
-				'Vendors'=>'LBL_VENDOR_INFORMATION', 'Products'=>'LBL_PRICING_INFORMATION',
-				'Services'=>'LBL_PRICING_INFORMATION');
+			$mods = array(
+				'Accounts'=>'LBL_ACCOUNT_INFORMATION',
+				'Contacts'=>'LBL_CONTACT_INFORMATION',
+				'Vendors'=>'LBL_VENDOR_INFORMATION',
+				'Products'=>'LBL_PRICING_INFORMATION',
+				'Services'=>'LBL_PRICING_INFORMATION',
+			);
 			foreach ($mods as $modname => $block) {
 				$module = Vtiger_Module::getInstance($modname);
-				$blockInstance = VTiger_Block::getInstance($block,$module);
+				$blockInstance = VTiger_Block::getInstance($block, $module);
 				if ($blockInstance) {
 					$field = new Vtiger_Field();
 					$field->name = 'taxtypeid';
@@ -133,7 +136,7 @@ class cbTaxType extends CRMEntity {
 					$field->typeofdata = 'I~O';
 					$field->presence = 0;
 					$blockInstance->addField($field);
-					$field->setRelatedModules(Array('cbTaxType'));
+					$field->setRelatedModules(array('cbTaxType'));
 					echo "<br><b>Added Field to $modname module.</b><br>";
 				}
 			}
